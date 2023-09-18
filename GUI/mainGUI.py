@@ -1,7 +1,8 @@
 import sys
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt6 import QtCore, QtGui, QtWidgets
 import sqlite3
-from PyQt5 import QtWidgets
+from PyQt6 import QtWidgets
+from PyQt6.QtGui import QAction
 
 # ---------- We dont Touch --------------------
 class Ui_Discovery(object):
@@ -63,8 +64,8 @@ class Ui_Outsecure(object):
         Outsecure.setStyleSheet("background-color: rgb(8, 8, 8);")
         self.line = QtWidgets.QFrame(Outsecure)
         self.line.setGeometry(QtCore.QRect(10, 80, 591, 20))
-        self.line.setFrameShape(QtWidgets.QFrame.HLine)
-        self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line.setFrameShape(QtWidgets.QFrame.Shape.HLine)
+        self.line.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
         self.line.setObjectName("line")
         self.l_title = QtWidgets.QLabel(Outsecure)
         self.l_title.setGeometry(QtCore.QRect(170, 20, 231, 41))
@@ -399,7 +400,7 @@ def main():
     app = QtWidgets.QApplication(sys.argv)
     controller = Controller()
     controller.show_login_page()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
 
 
 if __name__ == "__main__":
