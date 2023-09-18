@@ -132,12 +132,12 @@ class Ui_NewUser(object):
         self.l_newuser.setStyleSheet("font: 24pt \".SF NS Text\";\n"
                                      "color: rgb(234, 239, 238);\n"
                                      "")
-        self.l_newuser.setAlignment(QtCore.Qt.AlignCenter)
+        self.l_newuser.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.l_newuser.setObjectName("l_newuser")
         self.line = QtWidgets.QFrame(NewUser)
         self.line.setGeometry(QtCore.QRect(10, 50, 591, 20))
-        self.line.setFrameShape(QtWidgets.QFrame.HLine)
-        self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line.setFrameShape(QtWidgets.QFrame.Shape.HLine)
+        self.line.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
         self.line.setObjectName("line")
         self.txt_firstname = QtWidgets.QLineEdit(NewUser)
         self.txt_firstname.setEnabled(True)
@@ -233,7 +233,7 @@ class Login(QtWidgets.QWidget,Ui_Outsecure):
     def pop_message(self,text=""):
         msg = QtWidgets.QMessageBox()
         msg.setText("{}".format(text))
-        msg.exec_()
+        msg.exec()
 
     def bool_check_username(self):
         if len(self.txt_password.text()) <= 1:
@@ -281,7 +281,7 @@ class Newuser(QtWidgets.QWidget, Ui_NewUser):
     def pop_message(self,text=""):
         msg = QtWidgets.QMessageBox()
         msg.setText("{}".format(text))
-        msg.exec_()
+        msg.exec()
 
 
     def btn_submit_handler(self):
