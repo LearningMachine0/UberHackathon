@@ -4,60 +4,80 @@ import sqlite3
 from PyQt6 import QtWidgets
 from PyQt6.QtGui import QAction
 
-# ---------- We dont Touch --------------------
-class Ui_Discovery(object):
+class LocationResults(QtWidgets.QWidget):
+    def __init__(self, matching_locations):
+        super().__init__()
+        self.setWindowTitle("Location Results")
+        self.setGeometry(100, 100, 400, 300)
+
+        self.list_widget = QtWidgets.QListWidget(self)
+        self.list_widget.setGeometry(QtCore.QRect(50, 50, 300, 200))
+
+        for location in matching_locations:
+            item = QtWidgets.QListWidgetItem(location)
+            self.list_widget.addItem(item)
 
 
-    def setupUi(self, Form):
-        Form.setObjectName("Form")
-        Form.resize(682, 443)
-        Form.setStyleSheet("background-color: rgb(11, 11, 11);")
-        self.tableWidget = QtWidgets.QTableWidget(Form)
-        self.tableWidget.setGeometry(QtCore.QRect(140, 70, 441, 251))
-        self.tableWidget.setStyleSheet("background-color: rgb(189, 193, 193);\n"
-                                       "color: rgb(27, 28, 28);")
-        self.tableWidget.setRowCount(10)
-        self.tableWidget.setColumnCount(4)
-        self.tableWidget.setObjectName("tableWidget")
-        self.btn_submit = QtWidgets.QPushButton(Form)
-        self.btn_submit.setGeometry(QtCore.QRect(270, 340, 181, 31))
-        self.btn_submit.setStyleSheet("color: rgb(250, 255, 255);\n"
-                                      "background-color: rgb(73, 199, 41);\n"
-                                      "border-style:outset;\n"
-                                      "border-radius:10px;\n"
-                                      "font: 14pt \"Arial\";")
-        self.btn_submit.setObjectName("btn_submit")
-        self.l_title = QtWidgets.QLabel(Form)
-        self.l_title.setGeometry(QtCore.QRect(220, 20, 251, 21))
-        self.l_title.setStyleSheet("\n"
-                                   "color:White;\n"
-                                   "font: 18pt \".SF NS Text\";")
-        self.l_title.setObjectName("l_title")
-        self.btn_back = QtWidgets.QPushButton(Form)
-        self.btn_back.setGeometry(QtCore.QRect(270, 390, 181, 31))
-        self.btn_back.setStyleSheet("color: rgb(250, 255, 255);\n"
-                                    "background-color: rgb(73, 199, 41);\n"
-                                    "border-style:outset;\n"
-                                    "border-radius:10px;\n"
-                                    "font: 14pt \"Arial\";")
-        self.btn_back.setObjectName("btn_back")
+class UserInfo(QtWidgets.QWidget):
+    def __init__(self, username):
+        QtWidgets.QWidget.__init__(self)
+        self.setWindowTitle("User Information")
+        self.resize(529, 342)
+        
+        #Name Display
+        self.label_username = QtWidgets.QLabel(self)
+        self.label_username.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.label_username.resize(300,50)
+        self.label_username.move(100,20)
+        self.label_username.setFont(QtGui.QFont("Arial", 16))
+        self.label_username.setText(f"Welcome: {username}")
+        self.label_username.setStyleSheet("color: white; font-weight: bold;")
 
-        self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName(Form)
-        self.btn_submit.clicked.connect(self.load_data)
 
-    def retranslateUi(self, Form):
-        _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.btn_submit.setText(_translate("Form", "Submit"))
-        self.l_title.setText(_translate("Form", "Automated Host Discovery "))
-        self.btn_back.setText(_translate("Form", "Back"))
+        self.btn_search = QtWidgets.QPushButton("Search", self)
+        self.btn_search.setGeometry(200, 150, 100, 40)
+        self.btn_search.clicked.connect(self.search)
+        self.btn_search.setStyleSheet("color: white; background-color: blue; font-weight: bold;")
+
+        self.text_input = QtWidgets.QLineEdit(self)
+        self.text_input.setGeometry(100, 100, 300, 30)
+        self.text_input.setPlaceholderText("Enter destination")
+        self.text_input.setStyleSheet("color: white;")
+
+        #Login Button
+        self.btn_logout = QtWidgets.QPushButton("Logout", self)
+        self.btn_logout.resize(100,40)
+        self.btn_logout.clicked.connect(self.logout)
+        self.btn_logout.setStyleSheet("color: white;")
+        self.btn_logout.setStyleSheet("background-color: white;")
+        self.btn_logout.setStyleSheet("color: black; background-color: white; font-weight: bold; border: 2px solid red;")
+
+        #StyleSheet
+
+        self.setStyleSheet("background-color: black;")
+
+    locations = ["Surrey Central Mall", "Guildford Mall", "Tim Hortons", "Starbucks"]
+
+    def search(self):
+        search_text = self.text_input.text()
+        matching_locations = [location for location in self.locations if search_text.lower() in location.lower()]
+        if matching_locations:
+            self.location_results = LocationResults(matching_locations)
+            self.location_results.show()
+        else:
+            QtWidgets.QMessageBox.information(self, "No Matches", "No matching locations found.")
+        print("Searching for:", search_text)
+
+    def logout(self):
+        self.close()
 
 class Ui_Outsecure(object):
     """
     LOGIN PAGE
     """
     def setupUi(self, Outsecure):
+
+
         Outsecure.setObjectName("Outsecure")
         Outsecure.resize(529, 342)
         Outsecure.setMouseTracking(True)
@@ -109,6 +129,15 @@ class Ui_Outsecure(object):
 
         self.retranslateUi(Outsecure)
         QtCore.QMetaObject.connectSlotsByName(Outsecure)
+
+         # Create a QLabel for the image
+
+        image_path = "UberHackathon/images/hero-image1.jpg"
+        self.image_label = QtWidgets.QLabel(Outsecure)
+        self.image_label.setGeometry(QtCore.QRect(0, 0, 100, 75)) 
+        pixmap = QtGui.QPixmap(image_path)  
+        self.image_label.setPixmap(pixmap)
+        self.image_label.setScaledContents(True)
 
     def retranslateUi(self, Outsecure):
         _translate = QtCore.QCoreApplication.translate
@@ -260,8 +289,10 @@ class Login(QtWidgets.QWidget,Ui_Outsecure):
         val = self.bool_check_username()
 
         if (val):
-            self.pop_message(text="Welcome ")
-            self.switch_window1.emit()
+            username = self.txt_username.text()
+            self.user_info = UserInfo(username)
+            self.user_info.show()
+            self.close()
 
         else:
             self.pop_message("Invalid username or password ")
@@ -344,33 +375,6 @@ class Newuser(QtWidgets.QWidget, Ui_NewUser):
             self.pop_message(text="Added to Database ! ")
 
 
-class Discovery(QtWidgets.QWidget, Ui_Discovery):
-    switch_window = QtCore.pyqtSignal()
-
-    def __init__(self):
-        QtWidgets.QWidget.__init__(self)
-        self.setupUi(self)
-        self.btn_submit.clicked.connect(self.btn_submit_handler)
-        self.btn_back.clicked.connect(self.btn_back_handler)
-
-    def pop_message(self,text=""):
-        msg = QtWidgets.QMessageBox()
-        msg.setText("{}".format(text))
-        msg.exec_()
-
-    def load_data(self):
-        self.tableWidget.setItem(0,0, QtWidgets.QTableWidgetItem(str("Sr No")))
-        self.tableWidget.setItem(0,1, QtWidgets.QTableWidgetItem(str(" Ip Address")))
-        self.tableWidget.setItem(0,2, QtWidgets.QTableWidgetItem(str("Mac Address")))
-        self.tableWidget.setItem(0,3, QtWidgets.QTableWidgetItem(str("Vendor")))
-
-    def btn_submit_handler(self):
-        self.load_data()
-
-    def btn_back_handler(self):
-        self.switch_window.emit()
-
-
 class Controller:
 
     def __init__(self):
@@ -379,7 +383,6 @@ class Controller:
     def show_login_page(self):
         self.login = Login()
         self.login.switch_window.connect(self.show_newuser_page)
-        self.login.switch_window1.connect(self.show_discovery)
         self.login.show()
 
     def show_newuser_page(self):
@@ -387,13 +390,6 @@ class Controller:
         self.newuser.switch_window.connect(self.show_login_page)
         self.login.close()
         self.newuser.show()
-
-    def show_discovery(self):
-        self.discovery = Discovery()
-        self.discovery.switch_window.connect(self.show_login_page)
-        self.login.close()
-        self.discovery.show()
-
 
 
 def main():
