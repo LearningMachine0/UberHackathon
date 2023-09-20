@@ -56,7 +56,13 @@ class UserInfo(QtWidgets.QWidget):
 
         self.setStyleSheet("background-color: black;")
 
-    locations = ["Surrey Central Mall", "Guildford Mall", "Tim Hortons", "Starbucks"]
+    locations = ["Uberland Central Mall", "Grand Uber Mall", "Tim Hortons", "Starbucks", "Uber Cafe", "Uber Highschool", 
+                 "Uber State University", "Uberland Insititute of Technology", "Uberland Park", "Uberland Zoo", "Uberland Airport", "Uberland Train Station",
+                 "Uberland Bus Station", "Uberland City Hall", "Uberland Police Station", "Uberland Fire Station", "Uberland Hospital",
+                 "Uberland Post Office", "Uber Public Library", "Uberland Museum", "Uberland Stadium", "Uberland Movie Theater",
+                 "Uber Bowling Alley", "Uberland Arcade", "Uberland Gym", "Uber Swimming Pool", "Uber Golf Course", "Uber Recreational Centre", 
+                 "Cactus Club Restaurant", "Uber Bay Beach", "Uber Gas Station", "Uber Car Wash", "Uber Elementary School", "Uber Middle School", 
+                 "Uber Supermarket", "Uberland Pharmacy", "Uber Central Bank", "Grand Uber Hotel"]
 
     def search(self):
         search_text = self.text_input.text()
