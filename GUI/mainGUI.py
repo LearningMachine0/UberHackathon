@@ -90,7 +90,7 @@ class UserInfo(QtWidgets.QWidget):
         per_increment_cost = 0.197
         increment_size = 0.1
 
-        #Calculate the number of 0.1 increments in the given distance
+        #Calculatethe number of 0.1 increments in the given distance
         increments = distance / increment_size
 
         # Calculate the cost based on the flat fee and per increment cost
@@ -112,7 +112,6 @@ class UserInfo(QtWidgets.QWidget):
 
 
     def openNewTab(self, location_name, distance):
-        # Create and open a new tab with the selected location
         traffic_level = random.choice(self.traffic)
         if self.current_tab:
             self.current_tab.close()
@@ -151,7 +150,6 @@ class UserInfo(QtWidgets.QWidget):
                 new_tab.setStyleSheet("background-color: lightgray;")
                 table_widget.setStyleSheet("QTableWidget { background-color: white; }")
 
-            # Add any widgets or content you want for the new tab here
             new_tab.show()
             self.open_tabs.append(new_tab)
 

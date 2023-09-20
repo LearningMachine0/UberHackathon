@@ -2,3 +2,19 @@
 This is the repository for the Coding Gladiators team.
 
 Category: coding
+
+To begin the application, you have to create an account through the new user button.
+
+Only a username and password is necessary and will be inputted into the database.
+
+After creating an account, use the username and password to login into the application.
+
+This will lead you to the search bar, this will allow you to search locations, for example
+inputting mall will give you two options, "Grand Uber Mall" and "Uberland Central Mall".
+
+If you submit the search bar without inputting, it will reveal all the locations.
+
+Clicking on the destination you want to go on will reveal its information, for example
+clicking on "Grand Uber Mall" will reveal the statistics about traffic, cost and distance.
+
+To end the application there is a log out button on the left corner of the search bar page.
