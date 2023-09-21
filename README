@@ -3,7 +3,9 @@ This is the repository for the Coding Gladiators team.
 
 Category: coding
 
-To begin the application, you have to create an account through the new user button.
+To begin the application, run mainGUI.py in GUI folder
+
+Once in the app, you have to create an account through the new user button.
 
 Only a username and password is necessary and will be inputted into the database.
 
